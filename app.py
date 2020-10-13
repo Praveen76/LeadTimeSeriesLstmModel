@@ -108,9 +108,6 @@ def n_step_forecast(df, n):
 #Forecasting
 #steps = 8 # Number of 6 hour periods to forecast
 
-
-history_.to_csv('history_.csv',index=False)
-
 app = Flask(__name__)
 
 
