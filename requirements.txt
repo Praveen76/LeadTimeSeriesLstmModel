@@ -8,7 +8,6 @@ MarkupSafe==1.1.1
 Werkzeug==0.15.5
 numpy>=1.9.2
 scipy>=0.15.1
-matplotlib>=1.4.3
 pandas>=0.19
 tpot>=0.11.0
 seaborn==0.10.0
