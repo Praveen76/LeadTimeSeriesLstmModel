@@ -146,7 +146,7 @@ def predict():
     
     history_=history_.iloc[-steps:, ]
     history_=history_.clip(lower=0)
-    history_.rename(index={'DateAdded': 'Date and Hour'}, inplace=True)
+    history_.index.names = ['Date and Hour']
     history_=history_.round(2)
     
     print('history_ dataframe Size',history_.shape)
