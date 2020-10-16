@@ -108,6 +108,7 @@ def n_step_forecast(df, n):
 #Forecasting
 #steps = 8 # Number of 6 hour periods to forecast
 
+
 app = Flask(__name__)
 
 
@@ -124,7 +125,8 @@ def predict():
      
 
     #final_features = [np.array(int_features)]
-    steps=int(int_features[0])
+    Hours=int(int_features[0])
+    steps=int(Hours/6)
     
     history = n_step_forecast(df_z, steps)
 
@@ -136,7 +138,8 @@ def predict():
         index=history.index
     )
         
-
+        
+    
     history = n_step_forecast(df_z, steps)
     
     history_ = pd.DataFrame(
@@ -147,16 +150,16 @@ def predict():
     history_=history_.iloc[-steps:, ]
     history_=history_.clip(lower=0)
     history_.index.names = ['Date and Hour']
+    history_=history_.astype(dtype='int32')
     
-    history_=history_.round(0)
     
     print('history_ dataframe Size',history_.shape)
     
     print('history_ dataframe',history_)
-    
+    #result=history_.to_html()
     return history_.to_html() 
     #output = round(prediction[0], 2)
-    #return render_template('home.html', prediction_text="Predicted leads percentage for input datapoints : {} %".format(predPrctg[0]))
+    #return render_template('home.html', prediction_text=result)
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
@@ -172,19 +175,6 @@ def predict_api():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000,debug=True)
-    
-
-
-
-
-
-
-
-
-
-
-
-
+    app.run(debug=True)
 
 
